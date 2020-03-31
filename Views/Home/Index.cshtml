@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Magic 8 Ball</h1>
+    <p class="lead">A World of Wonder Awaits You</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Indescribable Magic</h2>
+        <p>
+            The Magic 8 Ball allows you to unlock the powers of the cosmos. Are there questions that you have always wanted answers to? Do you wonder what the meaning of life is? The Magic 8 Ball can stare far and wide into the abyss and return life's most meaningful answers.
+        </p>
+    </div>
+    <div class="col-md-6">
+        @if (ViewBag.MessageSent == null)
+        {
+            <h2>Getting Started</h2>
+            <p>Are you ready to ask the Magic 8 Ball a question? Give us your phone number to get started </p>
+            using (Html.BeginForm("SendSMS", "Sms"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.Editor("phone", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>Message Received</h2>
+            <p>
+                You have unlocked the magical, mystical powers of the Magic 8 Ball. You will receive a text shortly. Respond with the question that you need answer to. The Magic 8 Ball will send you the result of its deep look into cosmos.
+            </p>
+        }
+
+    </div>
+</div>
